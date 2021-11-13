@@ -6,4 +6,4 @@ class IssueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Issue
-        fields = ['title', 'body', ]
+        fields = ['id', 'title', 'body', ]
