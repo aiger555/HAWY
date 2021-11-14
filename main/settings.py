@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'drf_yasg',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
     # apps
     'issues',
+    'accounts',
 ]
 
 SITE_ID = 1
@@ -62,12 +64,14 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-          'rest_framework.permissions.IsAuthenticated',
-    ]
+          'rest_framework.permissions.AllowAny',
+    ],
+    'USER_DETAIL_SERIALIZER':'accounts.serializer.UserDetailSeriaizer',
 }
 
 ROOT_URLCONF = 'main.urls'
@@ -140,7 +144,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+AUTH_USER_MODEL = 'accounts.User'
+
+ACCOUNT_EMAIL_REQUIRED = False
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
