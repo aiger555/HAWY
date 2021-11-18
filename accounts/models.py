@@ -40,8 +40,13 @@ class UserManager(BaseUserManager):
                                 is_superuser=True, **kwargs)
         user.save(using=self._db)
         return user
+        
 
-    
+class Rating(models.Model):
+    likes = models.BigIntegerField(default=0)
+    dislikes = models.BigIntegerField(default=0)
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=200, unique=True)
     email = models.EmailField(max_length=250, unique=True)
@@ -55,8 +60,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     about_me = models.TextField(blank=True, null=True)
     profile_image = models.ImageField(null=True)
     phone = models.CharField(max_length=30)
-
+    rating = models.OneToOneField(Rating, on_delete=models.CASCADE, related_name='rating', null=True)
+    
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', ]
+
+
+
+    
+
+ 

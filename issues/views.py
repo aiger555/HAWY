@@ -31,3 +31,29 @@ class IssueAPIView(APIView):
         serializer = IssueSerializer(new_issue)
 
         return Response(serializer.data)
+
+    def put(self, request, *args, **kwargs):
+        issue_object = Issue.objects.get()
+    
+        data = request.data
+
+        issue_object.title = data['title']
+        issue_object.body = data['body']
+        issue_object.save()
+
+        serializer = IssueSerializer(issue_object)
+        
+        return Response(serializer.data)
+
+    def patch(self, request, *args, **kwargs):
+        issue_object = Issue.objects.get()
+        
+        data = request.data
+
+        issue_object.title = data.get('title', issue_object.title)
+        issue_object.body = data.get('body', issue_object.body)
+        issue_object.save()
+
+        serializer = IssueSerializer(issue_object)
+
+        return Response(serializer.data)

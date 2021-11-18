@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from allauth.accounts.adapter import get_adapter
-from main import settings
-from .models import User
+from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
+from main import settings
+from .models import Rating, User
+
 
 
 class RegisterSerializer(serializers.Serializer):
@@ -48,6 +49,13 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('pk', 'username', 'email', 'first_name',
-                  'last_name', 'about_me', 'phone', 'profile_image', 'issue')
-        read_only_fields = ('email', )
+                  'last_name', 'about_me', 'phone', 'profile_image', 'issue', 'rating')
+        read_only_fields = ('email', 'rating', 'date_joined')
         depth = 1
+
+
+class RatingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Rating
+        fields = ('id', 'likes', 'dislikes', )

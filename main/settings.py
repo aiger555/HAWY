@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_auth.registration',
     'rest_auth',
     'drf_yasg',
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
     # apps
     'issues',
     'accounts',
@@ -64,17 +64,23 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-          'rest_framework.permissions.AllowAny',
+          'rest_framework.permissions.IsAuthenticated',
     ],
-    'USER_DETAIL_SERIALIZER':'accounts.serializer.UserDetailSeriaizer',
 }
 
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializer.UserDetailsSerializer'
+}
+
+
 ROOT_URLCONF = 'main.urls'
+
 
 TEMPLATES = [
     {
@@ -90,6 +96,14 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
