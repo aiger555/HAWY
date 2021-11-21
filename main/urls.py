@@ -15,10 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+
 from rest_framework import permissions
 
 from drf_yasg.views import get_schema_view
@@ -44,9 +41,7 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/swagger/', schema_view.with_ui(), name='schema-json'),
-    path('api/v1/', include('issues.urls')),
-    path('api/v1/', include('accounts.urls')),
+    path('api/v1/', include('appointments.urls')),
+    path('api/v1/issues/', include('issues.urls')),
 ]

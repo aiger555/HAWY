@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(4vqf*=ciidl3!^tu6k6c7ugq3y3$-gswb41+n7etg)ryr-7!z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'rest_auth',
     'drf_yasg',
+    'django_filters',
     'allauth',
     'allauth.account',
     # apps
     'issues',
-    'accounts',
+    'appointments',
+    
 ]
 
 SITE_ID = 1
@@ -64,8 +66,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
@@ -73,10 +74,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'accounts.serializer.UserDetailsSerializer'
-}
 
 
 ROOT_URLCONF = 'main.urls'
@@ -158,7 +155,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'appointments.User'
 
 ACCOUNT_EMAIL_REQUIRED = False
 
