@@ -42,6 +42,4 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
     path('api/swagger/', schema_view.with_ui(), name='schema-json'),
-    path('api/v1/', include('appointments.urls')),
-    path('api/v1/issues/', include('issues.urls')),
 ]
