@@ -68,6 +68,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -164,6 +165,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
+    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer'
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
