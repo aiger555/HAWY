@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     # apps
     'accounts',
+    'assignments',
 ]
 
 
