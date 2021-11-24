@@ -44,4 +44,5 @@ urlpatterns = [
     path('api/v1/users/', include('accounts.urls')),
     path('api/v1/assignments/', include('assignments.tasks.urls')),
     path('api/v1/spec_assignments/', include('assignments.specified_tasks.urls')),
+    path('api/v1/rating', include('ratings.urls')),
 ]
