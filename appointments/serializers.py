@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Appointment, PastAppointment
+from .models import Appointment
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
@@ -11,9 +11,3 @@ class AppointmentSerializer(serializers.ModelSerializer):
         depth = 1
     
 
-class PastAppointmentSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = PastAppointment
-        fields = ('__all__')
-        depth = 1

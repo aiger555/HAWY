@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Appointment, PastAppointment
+from .models import Appointment
 
 
 admin.site.register(Appointment)
-admin.site.register(PastAppointment)
+

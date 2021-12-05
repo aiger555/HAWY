@@ -80,31 +80,5 @@ class AppointmentsForUserView(APIView):
         return Response(serializer.data)
 
 
-class PastAppointmentList(APIView):
-    """
-    Read all appointments
-    """
-    permission_classes = [permissions.IsAdminUser]
-
-    def get(self, request):
-        appointments = models.PastAppointment.objects.all()
-        serializer = serializers.PastAppointmentSerializer(appointments, many=True)
-        return Response(serializer.data)
 
 
-class PastAppointmentDetail(APIView):
-    """
-    Read only functionality for one Appointment
-    """
-    permission_classes = [permissions.IsAdminUser]
-
-    def _get_appointment(self, pk):
-        try:
-            return models.PastAppointment.objects.get(pk=pk)
-        except models.PastAppointment.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk):
-        appointment = self._get_appointment(pk)
-        serializer = serializers.PastAppointmentSerializer(appointment)
-        return Response(serializer.data)

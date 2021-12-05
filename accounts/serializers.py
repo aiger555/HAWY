@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
 
-from .models import Doctor, Patient
+from .models import Doctor, Patient, User
 
 
 class DoctorCustomRegistrationSerializer(RegisterSerializer):
@@ -63,8 +63,16 @@ class DoctorSerializer(serializers.ModelSerializer):
         fields = ('__all__')
         depth = 1
 
+
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Patient
+        fields = ('__all__')
+        depth = 1
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
         fields = ('__all__')
         depth = 1
