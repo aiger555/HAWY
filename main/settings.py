@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(4vqf*=ciidl3!^tu6k6c7ugq3y3$-gswb41+n7etg)ryr-7!z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -46,10 +46,9 @@ INSTALLED_APPS = [
     'django_filters',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     # apps
     'accounts',
-    'assignments',
-    'ratings',
 ]
 
 
@@ -164,12 +163,3 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 AUTH_USER_MODEL = 'accounts.User'
 
-
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
-    'TOKEN_SERIALIZER': 'accounts.serializers.TokenSerializer'
-}
-
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
-}

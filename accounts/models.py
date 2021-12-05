@@ -1,30 +1,31 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 
 class User(AbstractUser):
-    is_patient = models.BooleanField(default=False)
-    is_doctor = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.username
-
-
-class Patient(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    probem_title = models.CharField(max_length=200)
-    problem_body = models.TextField()
-
-    def __str__(self):
-        return self.user.username
+  is_doctor = models.BooleanField(default=False)
+  is_patient = models.BooleanField(default=False)
 
 
 class Doctor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    probem_title = models.CharField(max_length=200)
-    phone_number = models.CharField(max_length=30)
-    sertificate = models.ImageField(blank=False)
-    experience_of_work = models.TextField()
+    doctor = models.OneToOneField(
+                                settings.AUTH_USER_MODEL, 
+                                on_delete=models.CASCADE, 
+                                blank=True, 
+                                null=True
+                                )
+    age = models.PositiveIntegerField(blank=True)
+    sertificate = models.CharField(max_length=100)
+    experience = models.TextField()
 
     def __str__(self):
-        return self.user.username
+        return self.doctor.username
+
+
+class Patient(models.Model):
+    patient = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    age = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.patient.username
