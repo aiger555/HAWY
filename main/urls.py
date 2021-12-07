@@ -43,4 +43,5 @@ urlpatterns = [
     path('api/swagger/', schema_view.with_ui(), name='schema-json'),
     path('api/v1/', include('accounts.urls')),
     path('', include('appointments.urls')),
+    path('chat/', include('chat.urls'))
 ]
