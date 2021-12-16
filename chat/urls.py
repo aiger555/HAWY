@@ -5,7 +5,9 @@ from .views import (
     ChatDetailView,
     ChatCreateView,
     ChatUpdateView,
-    ChatDeleteView
+    ChatDeleteView,
+    MessageView,
+    ContactView,
 )
 
 
@@ -14,5 +16,7 @@ urlpatterns = [
     path('create/', ChatCreateView.as_view()),
     path('<pk>', ChatDetailView.as_view()),
     path('<pk>/update/', ChatUpdateView.as_view()),
-    path('<pk>/delete/', ChatDeleteView.as_view())
+    path('<pk>/delete/', ChatDeleteView.as_view()),
+    path('messages/', MessageView.as_view()),
+    path('contacts/', ContactView.as_view()),
 ]

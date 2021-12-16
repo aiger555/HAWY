@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
-from .models import Chat, Contact
+from .models import Chat, Contact, Message
 
 
 User = get_user_model()
@@ -19,6 +19,18 @@ class ContactSerializer(serializers.StringRelatedField):
         return value
 
 
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ('__all__')
+
+
+class ContSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ('__all__')
+
+
 class ChatSerializer(serializers.ModelSerializer):
     participants = ContactSerializer(many=True)
 
@@ -26,6 +38,7 @@ class ChatSerializer(serializers.ModelSerializer):
         model = Chat
         fields = ('id', 'messages', 'participants')
         read_only = ('id')
+        depth = 1
 
     def create(self, validated_data):
         print(validated_data)

@@ -2,6 +2,9 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 
 from rest_framework import permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
@@ -10,9 +13,10 @@ from rest_framework.generics import (
     UpdateAPIView
 )
 
-from .models import Chat, Contact
+from .models import Chat, Contact, Message
 
-from .serializers import ChatSerializer
+from .serializers import ChatSerializer, MessageSerializer, ContSerializer
+
 
 User = get_user_model()
 
@@ -66,3 +70,35 @@ class ChatDeleteView(DestroyAPIView):
     queryset = Chat.objects.all()
     serializer_class = ChatSerializer
     permission_classes = (permissions.IsAuthenticated, )
+
+
+class MessageView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        serializer = MessageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(request.data)
+        print(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ContactView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request): 
+        appointments = Contact.objects.all()
+        serializer = ContSerializer(appointments, many=True)
+        return Response(serializer.data)
+            
+
+    def post(self, request):
+        serializer = ContSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(request.data)
+        print(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
