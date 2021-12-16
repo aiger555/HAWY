@@ -36,6 +36,7 @@ class DoctorCustomRegistrationSerializer(RegisterSerializer):
 
 class PatientCustomRegistrationSerializer(RegisterSerializer):
     patient = serializers.PrimaryKeyRelatedField(read_only=True,) 
+    age = serializers.IntegerField(required=False)
     
     def get_cleaned_data(self):
             data = super(PatientCustomRegistrationSerializer, self).get_cleaned_data()
