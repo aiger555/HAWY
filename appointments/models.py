@@ -1,4 +1,3 @@
-from django.core.validators import int_list_validator
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 
@@ -12,7 +11,7 @@ class Appointment(models.Model):
     end_time = models.DateTimeField(blank=False)
     pats = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
     docs = models.ForeignKey(Doctor, on_delete=models.CASCADE, blank=True, null=True)
-    services = models.CharField(max_length=1000, validators=[int_list_validator], blank=False, null=False)
+    services = models.CharField(max_length=100, blank=False, null=False)
 
     def __str__(self):
         return f'StartTime={self.start_time} | EndTime={self.end_time} | Doctor={self.docs} | Patient={self.pats}'

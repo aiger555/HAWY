@@ -1,22 +1,7 @@
-from django.urls import path, re_path
+from django.urls import path
 
-from .views import (
-    ChatListView,
-    ChatDetailView,
-    ChatCreateView,
-    ChatUpdateView,
-    ChatDeleteView,
-    MessageView,
-    ContactView,
-)
-
+from .views import MessageList
 
 urlpatterns = [
-    path('', ChatListView.as_view()),
-    path('create/', ChatCreateView.as_view()),
-    path('<pk>', ChatDetailView.as_view()),
-    path('<pk>/update/', ChatUpdateView.as_view()),
-    path('<pk>/delete/', ChatDeleteView.as_view()),
-    path('messages/', MessageView.as_view()),
-    path('contacts/', ContactView.as_view()),
+   path('', MessageList.as_view())
 ]

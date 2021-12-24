@@ -47,10 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'corsheaders',
-    'graphene_django',
-    'safedelete',
-    'channels',
+    'widget_tweaks',
     # apps
     'accounts',
     'appointments',
@@ -111,16 +108,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'main.wsgi.application'
-ASGI_APPLICATION = "main.routing.application"
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

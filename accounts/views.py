@@ -46,7 +46,7 @@ class UserDetailView(APIView):
         error_object = {'error': ''}
         try:
             user = User.objects.get(pk=pk)            
-            if user != active_user and active_user.is_staff is False:  # handle permissions
+            if user != active_user and active_user.is_staff is False:  
                 user = None
                 error_object = {'error': 'User is not allowed to view this page.'}
             return user, error_object
