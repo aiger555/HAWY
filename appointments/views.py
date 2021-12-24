@@ -11,7 +11,6 @@ from .serializers import AppointmentSerializer
 from .models import Appointment
 
 
-
 class AppointmentList(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -67,6 +66,4 @@ class AppointmentsForUserView(APIView):
         serializer = AppointmentSerializer(appointments, many=True)
         return Response(serializer.data)
 
-
-
-
+    
